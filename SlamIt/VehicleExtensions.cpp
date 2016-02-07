@@ -150,7 +150,7 @@ namespace VehExt {
 	void VehicleExtensions::SetWheelsHealth(Vehicle handle, float health) {
 		uint64_t address = mem.GetAddressOfEntity(handle);
 
-		int offset = (getGameVersion() > 3 ? 0xAA0 : 0xA90);
+		int offset = (getGameVersion() > 3 ? 0xAA0 : 0xA80);
 
 		uint64_t wheelPtr;
 		wheelPtr = *reinterpret_cast<uint64_t *>(address + offset);
@@ -160,7 +160,7 @@ namespace VehExt {
 		for (int i = 0; i < 6; i++) {
 			wheels[i] = *reinterpret_cast<uint64_t *>(wheelPtr + 0x008 * i);
 			if (wheels[i]) {
-				*reinterpret_cast<float *>(wheels[i] + 0x1E0) = health;
+				*reinterpret_cast<float *>(wheels[i] + (getGameVersion() > 3 ? 0x1E0 : 0x1D0)) = health;
 			}
 		}
 	}
