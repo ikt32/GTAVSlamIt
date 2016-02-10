@@ -1,17 +1,25 @@
 #pragma once
 
 #include <cstdint>
-#include "..\..\inc\types.h"
+#include "..\..\ScriptHookV_SDK\inc\types.h"
 #include "NativeMemory.hpp"
 
 namespace VehExt {
 	class VehicleExtensions {
 	public:
-		uintptr_t PatchClutchAddress();
+		uintptr_t PatchClutchLow();
+		void RestoreClutchLow(uintptr_t address);
+
+		uintptr_t PatchClutchStationary01();
+		void RestoreClutchStationary01(uintptr_t address);
+
+		uintptr_t PatchClutchStationary04();
+		void RestoreClutchStationary04(uintptr_t address);
 
 		uint64_t GetAddress(Vehicle handle);
 		uint32_t GetGears(Vehicle handle);
 		void SetGears(Vehicle handle, uint32_t value);
+		uint32_t GetTopGear(Vehicle handle);
 		float GetCurrentRPM(Vehicle handle);
 		void SetCurrentRPM(Vehicle handle, float value);
 		float GetClutch(Vehicle handle);
@@ -31,7 +39,5 @@ namespace VehExt {
 		void SetWheelsHealth(Vehicle handle, float health);
 	private:
 		MemoryAccess mem;
-		//const char *GameClutchInstruction = "\xC7\x43\x40\xCD\xCC\xCC\x3D";
-		//const char *EmptyMask = "xxxxxxx";
 	};
 }
