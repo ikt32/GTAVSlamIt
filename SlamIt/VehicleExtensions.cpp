@@ -192,7 +192,7 @@ namespace VehExt {
 	uint64_t VehicleExtensions::GetWheelsPtr(Vehicle handle) {
 		uint64_t address = mem.GetAddressOfEntity(handle);
 
-		int offset = (getGameVersion() > 3 ? 0xAA0 : 0xA90);
+		int offset = (getGameVersion() > 3 ? 0xAA0 : 0xA80);
 
 		return *reinterpret_cast<uint64_t *>(address + offset);
 	}
