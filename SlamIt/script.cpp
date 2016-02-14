@@ -11,6 +11,7 @@ enum ControlType {
 };
 
 Vehicle vehicle;
+Vehicle prevVehicle;
 VehExt::VehicleExtensions ext;
 Player player;
 Ped playerPed;
@@ -20,6 +21,7 @@ bool controlCurr[SIZE_OF_ARRAY];
 bool controlPrev[SIZE_OF_ARRAY];
 
 int slamLevel;
+int prevNotification = 0;
 
 void readSettings() {
 	controls[Button] = GetPrivateProfileInt(L"MAIN", L"SwitchSlam", VK_DOWN, L"./SlamIt.ini");
@@ -61,9 +63,11 @@ void showText(float x, float y, float scale, char * text) {
 }
 
 void showNotification(char *message) {
+	if (prevNotification)
+		UI::_REMOVE_NOTIFICATION(prevNotification);
 	UI::_SET_NOTIFICATION_TEXT_ENTRY("STRING");
 	UI::_ADD_TEXT_COMPONENT_STRING(message);
-	UI::_DRAW_NOTIFICATION(false, false);
+	prevNotification = UI::_DRAW_NOTIFICATION(false, false);
 }
 
 void slam(Vehicle vehicle, int slamLevel) {
@@ -107,6 +111,11 @@ void update() {
 		|| VEHICLE::IS_THIS_MODEL_A_QUADBIKE(model)
 		|| VEHICLE::IS_THIS_MODEL_A_BICYCLE(model))
 		return;
+
+	if (vehicle != prevVehicle)
+		slamLevel = 0;
+	prevVehicle = vehicle;
+
 
 	if (isKeyJustPressed(controls[Button], Button)) {
 		readSettings();
