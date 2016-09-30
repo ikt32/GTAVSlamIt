@@ -12,7 +12,7 @@ enum ControlType {
 
 Vehicle vehicle;
 Vehicle prevVehicle;
-VehExt::VehicleExtensions ext;
+VehicleExtensions ext;
 Player player;
 Ped playerPed;
 
