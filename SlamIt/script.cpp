@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
-#include "VehicleExtensions.hpp"
+#include "../../GTAVManualTransmission/Gears/VehicleExtensions.hpp"
 
 enum ControlType {
 	Button = 0,
