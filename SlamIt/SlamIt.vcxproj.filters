@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="script.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="..\..\GTAVManualTransmission\Gears\VehicleExtensions.cpp">
       <Filter>external</Filter>
     </ClCompile>
@@ -24,6 +25,7 @@
     <ClInclude Include="..\..\ScriptHookV_SDK\inc\types.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="keyboard.h" />
     <ClInclude Include="..\..\GTAVManualTransmission\Gears\VehicleExtensions.hpp">
       <Filter>external</Filter>
     </ClInclude>

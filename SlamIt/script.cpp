@@ -1,6 +1,5 @@
 #include "script.h"
-#include <vector>
-#include <string>
+#include "keyboard.h"
 #include <sstream>
 #include <iomanip>
 #include "../../GTAVManualTransmission/Gears/VehicleExtensions.hpp"
@@ -24,17 +23,21 @@ int slamLevel;
 int prevNotification = 0;
 
 void readSettings() {
-	controls[Button] = GetPrivateProfileInt(L"MAIN", L"SwitchSlam", VK_DOWN, L"./SlamIt.ini");
+	char kbKeyBuffer[24];
+
+	GetPrivateProfileStringA("MAIN", "SwitchSlam", "DOWN", kbKeyBuffer, 24, "./SlamIt.ini");
+	controls[Button] = str2key(kbKeyBuffer);
+	//controls[Button] = GetPrivateProfileInt(L"MAIN", L"SwitchSlam", VK_DOWN, L"./SlamIt.ini");
 }
 
 bool isKeyPressed(int key) {
-	if (GetAsyncKeyState(key) & 0x8000)
+	if (IsKeyDown(key))// & 0x8000)
 		return true;
 	return false;
 }
 
 bool isKeyJustPressed(int key, ControlType control) {
-	if (GetAsyncKeyState(key) & 0x8000)
+	if (IsKeyDown(key))//GetAsyncKeyState(key) & 0x8000)
 		controlCurr[control] = true;
 	else
 		controlCurr[control] = false;
@@ -115,7 +118,6 @@ void update() {
 	if (vehicle != prevVehicle)
 		slamLevel = 0;
 	prevVehicle = vehicle;
-
 
 	if (isKeyJustPressed(controls[Button], Button)) {
 		readSettings();
