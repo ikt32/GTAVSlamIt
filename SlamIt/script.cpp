@@ -2,7 +2,7 @@
 #include "keyboard.h"
 #include <sstream>
 #include <iomanip>
-#include "../../GTAVManualTransmission/Gears/VehicleExtensions.hpp"
+#include "../../GTAVManualTransmission/Gears/Memory/VehicleExtensions.hpp"
 
 enum ControlType {
 	Button = 0,
