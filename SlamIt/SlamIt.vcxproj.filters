@@ -4,10 +4,10 @@
     <ClCompile Include="script.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="keyboard.cpp" />
-    <ClCompile Include="..\..\GTAVManualTransmission\Gears\VehicleExtensions.cpp">
+    <ClCompile Include="..\..\GTAVManualTransmission\Gears\Memory\VehicleExtensions.cpp">
       <Filter>external</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GTAVManualTransmission\Gears\NativeMemory.cpp">
+    <ClCompile Include="..\..\GTAVManualTransmission\Gears\Memory\NativeMemory.cpp">
       <Filter>external</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,10 +26,10 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="keyboard.h" />
-    <ClInclude Include="..\..\GTAVManualTransmission\Gears\VehicleExtensions.hpp">
+    <ClInclude Include="..\..\GTAVManualTransmission\Gears\Memory\VehicleExtensions.hpp">
       <Filter>external</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GTAVManualTransmission\Gears\NativeMemory.hpp">
+    <ClInclude Include="..\..\GTAVManualTransmission\Gears\Memory\NativeMemory.hpp">
       <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>

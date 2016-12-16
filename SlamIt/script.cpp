@@ -115,8 +115,11 @@ void update() {
 		|| VEHICLE::IS_THIS_MODEL_A_BICYCLE(model))
 		return;
 
-	if (vehicle != prevVehicle)
+	if (prevVehicle != vehicle) {
+		ext.ClearAddress();
+		ext.GetAddress(vehicle);
 		slamLevel = 0;
+	}
 	prevVehicle = vehicle;
 
 	if (isKeyJustPressed(controls[Button], Button)) {
