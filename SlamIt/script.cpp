@@ -19,25 +19,23 @@ int controls[SIZE_OF_ARRAY];
 bool controlCurr[SIZE_OF_ARRAY];
 bool controlPrev[SIZE_OF_ARRAY];
 
-int slamLevel;
+int slamLevel = 0;
 int prevNotification = 0;
 
 void readSettings() {
 	char kbKeyBuffer[24];
-
 	GetPrivateProfileStringA("MAIN", "SwitchSlam", "DOWN", kbKeyBuffer, 24, "./SlamIt.ini");
 	controls[Button] = str2key(kbKeyBuffer);
-	//controls[Button] = GetPrivateProfileInt(L"MAIN", L"SwitchSlam", VK_DOWN, L"./SlamIt.ini");
 }
 
 bool isKeyPressed(int key) {
-	if (IsKeyDown(key))// & 0x8000)
+	if (IsKeyDown(key))
 		return true;
 	return false;
 }
 
 bool isKeyJustPressed(int key, ControlType control) {
-	if (IsKeyDown(key))//GetAsyncKeyState(key) & 0x8000)
+	if (IsKeyDown(key))
 		controlCurr[control] = true;
 	else
 		controlCurr[control] = false;
@@ -52,7 +50,7 @@ bool isKeyJustPressed(int key, ControlType control) {
 	return false;
 }
 
-void showText(float x, float y, float scale, char * text) {
+void showText(float x, float y, float scale, const char * text) {
 	UI::SET_TEXT_FONT(0);
 	UI::SET_TEXT_SCALE(scale, scale);
 	UI::SET_TEXT_COLOUR(255, 255, 255, 255);
@@ -60,16 +58,16 @@ void showText(float x, float y, float scale, char * text) {
 	UI::SET_TEXT_CENTRE(0);
 	UI::SET_TEXT_DROPSHADOW(0, 0, 0, 0, 0);
 	UI::SET_TEXT_EDGE(1, 0, 0, 0, 205);
-	UI::_SET_TEXT_ENTRY("STRING");
-	UI::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(text);
-	UI::_DRAW_TEXT(x, y);
+	UI::BEGIN_TEXT_COMMAND_DISPLAY_TEXT("STRING");
+	UI::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(const_cast<char *>(text));
+	UI::END_TEXT_COMMAND_DISPLAY_TEXT(x, y);
 }
 
-void showNotification(char *message) {
+void showNotification(const char * message) {
 	if (prevNotification)
 		UI::_REMOVE_NOTIFICATION(prevNotification);
 	UI::_SET_NOTIFICATION_TEXT_ENTRY("STRING");
-	UI::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(message);
+	UI::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(const_cast<char *>(message));
 	prevNotification = UI::_DRAW_NOTIFICATION(false, false);
 }
 
@@ -107,14 +105,6 @@ void update() {
 	if (!ENTITY::DOES_ENTITY_EXIST(vehicle))
 		return;
 
-	Hash model = ENTITY::GET_ENTITY_MODEL(vehicle);
-
-	if (!VEHICLE::IS_THIS_MODEL_A_CAR(model)
-	    || VEHICLE::IS_THIS_MODEL_A_BIKE(model)
-		|| VEHICLE::IS_THIS_MODEL_A_QUADBIKE(model)
-		|| VEHICLE::IS_THIS_MODEL_A_BICYCLE(model))
-		return;
-
 	if (prevVehicle != vehicle) {
 		ext.ClearAddress();
 		ext.GetAddress(vehicle);
@@ -131,7 +121,7 @@ void update() {
 		}
 		slam(vehicle, slamLevel);
 		message << "Slam level: " << slamLevel;
-		showNotification((char *)message.str().c_str());
+		showNotification(message.str().c_str());
 	}
 }
 
