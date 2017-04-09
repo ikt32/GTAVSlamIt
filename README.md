@@ -11,3 +11,7 @@ Just a small script to damage vehicle wheels/suspensions so much, the car drops.
 
 Download the [ScriptHookV SDK](http://www.dev-c.com/gtav/scripthookv/) and extract it's contents to ScriptHookV_SDK. 
 Clone this repository to the same folder ScriptHookV_SDK was extracted so you have ScriptHookV_SDK and SlamIt in the same folder.
+
+## VStancer / Camber branch
+
+The branch has been moved to [its own repository](https://github.com/E66666666/VStancer).
