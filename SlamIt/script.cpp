@@ -106,8 +106,6 @@ void update() {
 		return;
 
 	if (prevVehicle != vehicle) {
-		ext.ClearAddress();
-		ext.GetAddress(vehicle);
 		slamLevel = 0;
 	}
 	prevVehicle = vehicle;
