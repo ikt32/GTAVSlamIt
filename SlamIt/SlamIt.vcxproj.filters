@@ -13,6 +13,9 @@
     <ClCompile Include="..\..\GTAVManualTransmission\Gears\Util\MathExt.cpp">
       <Filter>external</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\GTAVManualTransmission\Gears\Util\Logger.cpp">
+      <Filter>external</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="script.h" />
@@ -39,6 +42,9 @@
       <Filter>external</Filter>
     </ClInclude>
     <ClInclude Include="..\..\GTAVManualTransmission\Gears\Util\Versions.h">
+      <Filter>external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GTAVManualTransmission\Gears\Util\Logger.hpp">
       <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>
